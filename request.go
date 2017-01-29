@@ -29,7 +29,7 @@ const (
 	flickerSearchPhotoMethod = "flickr.photos.search"
 )
 
-func RequestSearchPhoto(apiKey, search string, perPage int, page int) ([]byte, error) {
+func RequestSearchPhoto(c *http.Client, apiKey, search string, perPage int, page int) ([]byte, error) {
 	parameters := map[string]string{
 		"method":   flickerSearchPhotoMethod,
 		"api_key":  apiKey,
@@ -42,7 +42,7 @@ func RequestSearchPhoto(apiKey, search string, perPage int, page int) ([]byte, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := http.DefaultClient.Get(builtURL)
+	response, err := c.Get(builtURL)
 	if err != nil {
 		return nil, err
 	}
