@@ -69,7 +69,7 @@ const (
 )
 
 func buildImages(photos []Photo) []ImageURL {
-	var imageURLs []ImageURL
+	imageURLs := make([]ImageURL, len(photos))
 	for _, p := range photos {
 		ThumbnailURL := fmt.Sprintf(imageURLFormat,
 			p.FarmID, p.ServerID, p.ID, p.Secret, thumbNailSize)
