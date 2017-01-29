@@ -8,7 +8,7 @@ import (
 )
 
 type ImageURL struct {
-	ThumbNailURL string `json:"thumbnail_url"`
+	ThumbnailURL string `json:"thumbnail_url"`
 	LargeURL     string `json:"large_url"`
 }
 
@@ -63,20 +63,20 @@ func decodeSearchPhotoResponseBody(data []byte) (*SearchPhotoResponse, error) {
 }
 
 const (
-    imageURLFormat = "https://farm%d.staticflickr.com/%s/%s_%s_%s.jpg"
-	thumbNailSize = "t"
-	largeSize     = "b"
+	imageURLFormat = "https://farm%d.staticflickr.com/%s/%s_%s_%s.jpg"
+	thumbNailSize  = "t"
+	largeSize      = "b"
 )
 
 func buildImages(photos []Photo) []ImageURL {
 	var imageURLs []ImageURL
 	for _, p := range photos {
-		thumbURL := fmt.Sprintf(imageURLFormat,
+		ThumbnailURL := fmt.Sprintf(imageURLFormat,
 			p.FarmID, p.ServerID, p.ID, p.Secret, thumbNailSize)
 		largeURL := fmt.Sprintf(imageURLFormat,
 			p.FarmID, p.ServerID, p.ID, p.Secret, largeSize)
 		imageURLs = append(imageURLs, ImageURL{
-			ThumbNailURL: thumbURL,
+			ThumbnailURL: ThumbnailURL,
 			LargeURL:     largeURL,
 		})
 	}
