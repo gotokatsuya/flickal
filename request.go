@@ -46,10 +46,10 @@ func RequestSearchPhoto(c *http.Client, apiKey, search string, perPage int, page
 	if err != nil {
 		return nil, err
 	}
+	defer response.Body.Close()
 	if response.StatusCode != http.StatusOK {
 		return nil, errors.New(response.Status)
 	}
-	defer response.Body.Close()
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
